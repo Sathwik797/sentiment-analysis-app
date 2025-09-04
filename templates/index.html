@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sentiment Analysis App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fa;
+      padding: 30px;
+      text-align: center;
+      color: #333;
+    }
+    h1 {
+      color: #222;
+      margin-bottom: 20px;
+    }
+    textarea {
+      width: 60%;
+      height: 120px;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    button {
+      padding: 12px 25px;
+      background: #007bff;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    table {
+      width: 80%;
+      margin: 30px auto;
+      border-collapse: collapse;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background: #007bff;
+      color: white;
+      font-size: 18px;
+    }
+    tr:hover {
+      background: #f1f1f1;
+    }
+    .positive { color: #28a745; font-weight: bold; }
+    .negative { color: #dc3545; font-weight: bold; }
+    .neutral { color: #6c757d; font-weight: bold; }
+    .progress-container {
+      width: 100%;
+      background: #e9ecef;
+      border-radius: 5px;
+      height: 15px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      transition: width 1s ease-in-out;
+    }
+    .progress-positive {
+      background: linear-gradient(90deg, #28a745, #218838);
+    }
+    .progress-negative {
+      background: linear-gradient(90deg, #dc3545, #c82333);
+    }
+    .progress-neutral {
+      background: linear-gradient(90deg, #6c757d, #495057);
+    }
+  </style>
+</head>
+<body>
+  <h1>🌟 Sentiment Analysis</h1>
+  <form method="POST" action="/predict-ui">
+    <textarea name="text" placeholder="Enter one or multiple sentences (each on a new line)..."></textarea><br>
+    <button type="submit">Analyze</button>
+  </form>
+
+  {% if results %}
+    <h2>📊 Analysis Results</h2>
+    <table>
+      <tr>
+        <th>📝 Sentence</th>
+        <th>✅ Sentiment</th>
+        <th>🔥 Confidence</th>
+      </tr>
+      {% for r in results %}
+      <tr>
+        <td>{{ r.original }}</td>
+        <td class="{{ r.label }}">{{ r.label | upper }}</td>
+        <td>
+          {{ r.score }}
+          <div class="progress-container">
+            <div class="progress-bar 
+              {% if r.label == 'positive' %}progress-positive{% endif %}
+              {% if r.label == 'negative' %}progress-negative{% endif %}
+              {% if r.label == 'neutral' %}progress-neutral{% endif %}"
+              style="width: {{ r.score * 100 }}%">
+            </div>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  {% endif %}
+</body>
+</html>
