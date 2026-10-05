@@ -1,82 +1,113 @@
-# 📊 Sentiment Analysis API  
+# 📊 Sentiment Analysis API
 
-A RESTful API built with **Flask**, **NLTK**, and **Hugging Face Transformers** for performing **sentiment analysis** on text data.  
-This project demonstrates **NLP preprocessing**, **transformer-based models**, and **cloud deployment**.  
+A Flask REST API for sentiment analysis using NLTK preprocessing and a pretrained Hugging Face Transformer model.
 
----
+## ✨ Features
 
-## 🚀 Features  
-- REST API using **Flask**  
-- Text **preprocessing with NLTK** (stopword removal, tokenization, punctuation cleanup)  
-- Sentiment classification using **Hugging Face pretrained transformer**  
-- Returns both **original** and **cleaned text** with prediction results  
-- Ready for **cloud deployment** (Heroku / Render / Railway / AWS)  
+- REST API built with Flask
+- Text preprocessing with NLTK
+- Transformer-based sentiment classification
+- Returns original text, cleaned text, predicted label, and confidence score
+- Simple API structure suitable for cloud deployment
 
----
+## 🛠️ Tech Stack
 
-## 📂 Project Structure  
-sentiment-analysis-api/
-│── app.py # Flask app (main API code)
-│── requirements.txt # Dependencies
-│── Procfile # (Heroku deployment)
-│── runtime.txt # Python version (for Heroku)
-│── README.md # Documentation
+- Python
+- Flask
+- NLTK
+- Hugging Face Transformers
 
----
+## 📂 Project Structure
 
-## ⚙️ Installation  
+```text
+.
+├── app.py
+├── requirements.txt
+├── Procfile
+├── runtime.txt
+└── README.md
+```
 
-1️⃣ Clone the repository  
+## 🚀 Run Locally
+
+Clone the repository:
+
 ```bash
-git clone https://github.com/your-username/sentiment-analysis-api.git
-cd sentiment-analysis-api
+git clone https://github.com/Sathwik797/sentiment-analysis-app.git
+cd sentiment-analysis-app
+```
 
-2️⃣ Create a virtual environment & activate it
+Create and activate a virtual environment:
+
+```bash
 python -m venv venv
-source venv/bin/activate    # Linux / Mac
-venv\Scripts\activate       # Windows
+```
 
-3️⃣ Install dependencies
+Windows:
+
+```bash
+venv\\Scripts\\activate
+```
+
+Linux/macOS:
+
+```bash
+source venv/bin/activate
+```
+
+Install dependencies:
+
+```bash
 pip install -r requirements.txt
+```
 
-▶️ Running Locally
+Start the API:
+
+```bash
 python app.py
-API will start at:
-👉 http://127.0.0.1:5000/
+```
 
-📡 API Endpoints
-🔹 Home (Check API status)
+The API runs locally on `http://127.0.0.1:5000/`.
 
-GET /
-Response: { "message": "✅ Sentiment Analysis API with NLTK + Hugging Face is running!" }
+## 📡 API
 
-🔹 Predict Sentiment
+### Health Check
 
-POST /predict
-Request Body (JSON):
+`GET /`
+
+Returns the API status.
+
+### Predict Sentiment
+
+`POST /predict`
+
+Request:
+
+```json
 {
   "text": "I love this project!"
 }
-Response:
+```
+
+Example response:
+
+```json
 {
   "original_text": "I love this project!",
   "cleaned_text": "love project",
   "label": "POSITIVE",
   "score": 0.9994
 }
+```
 
+## 🔮 Future Improvements
 
-🛠️ Tech Stack
- Python
- Flask
- NLTK (text preprocessing)
- Hugging Face Transformers (sentiment analysis)
+- Multilingual sentiment analysis
+- Containerized deployment
+- Frontend interface for interactive predictions
 
-✨ Future Improvements
- Add support for multiple languages
- Deploy with Docker + AWS/GCP
- Build a frontend UI for easy interaction
+## 👨‍💻 Author
 
-👨‍💻 Author
-Sathwik Reddy Obilipapannagari
+**Sathwik Reddy**
 
+GitHub: https://github.com/Sathwik797
